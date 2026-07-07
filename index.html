@@ -35,7 +35,41 @@
       color: var(--ink);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
     }
+
+    /* Floating background (matches the app's sign-in screen) */
+    .bg-fx {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(8px);
+    }
+    .glow-1 { top: -110px; left: -110px; width: 320px; height: 320px; background: #4AA8D8; opacity: 0.10; }
+    .glow-2 { bottom: 8%; right: -90px; width: 280px; height: 280px; background: #A78BFA; opacity: 0.10; }
+    .glow-3 { top: 42%; left: -70px; width: 240px; height: 240px; background: #FF8C42; opacity: 0.08; }
+    .bubble {
+      position: absolute;
+      opacity: 0.18;
+      animation: float 5s ease-in-out infinite;
+      will-change: transform;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bubble { animation: none; }
+    }
+    /* Keep content above the background layer */
+    .nav, .hero, .section, .footer { position: relative; z-index: 1; }
     h1, h2, h3, .heading {
       font-family: 'Raleway', -apple-system, sans-serif;
       font-weight: 800;
@@ -200,6 +234,19 @@
   </style>
 </head>
 <body>
+  <!-- Floating background bubbles (matches app sign-in screen) -->
+  <div class="bg-fx" aria-hidden="true">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+    <span class="bubble" style="top:11%; left:6%;  font-size:34px; animation-delay:0s;">☕</span>
+    <span class="bubble" style="top:8%;  right:9%; font-size:30px; animation-delay:0.7s;">🏐</span>
+    <span class="bubble" style="top:46%; left:9%;  font-size:26px; animation-delay:1.4s;">🎨</span>
+    <span class="bubble" style="top:38%; right:7%; font-size:32px; animation-delay:0.35s;">🚶</span>
+    <span class="bubble" style="top:72%; left:5%;  font-size:30px; animation-delay:1.05s;">🌅</span>
+    <span class="bubble" style="top:64%; right:8%; font-size:28px; animation-delay:0.56s;">🍽️</span>
+  </div>
+
   <!-- Nav -->
   <nav class="nav">
     <div class="wrap">
